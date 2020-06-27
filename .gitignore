@@ -3,3 +3,4 @@ obj/
 .csproj
 launch.json
 tasks.json
+test/

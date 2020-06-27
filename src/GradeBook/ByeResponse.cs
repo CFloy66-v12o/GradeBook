@@ -14,7 +14,7 @@ namespace GradeBook
 
             Console.WriteLine("All done now? yes/no\n");
             var byeResponse = Console.ReadLine().ToLower();
-            Console.WriteLine($" ...very well\n");
+            Console.WriteLine(" ...very well\n");
             
             if (byeResponse == yesAnswer)
             {

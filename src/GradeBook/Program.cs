@@ -21,6 +21,10 @@ namespace GradeBook
            
 
             Book book = new Book("Chris's Gradebook");
+            book.GradeAdded += OnGradeAdded;
+            book.GradeAdded -= OnGradeAdded;
+            book.GradeAdded += OnGradeAdded;
+            
             
             while(true)
             {
@@ -34,10 +38,15 @@ namespace GradeBook
              {
                 var grade = double.Parse(userInput);
                 book.AddGrade(grade);
+                //....
              }
-             catch(Exception ex)
+             catch(ArgumentException)
              {
-                 Console.WriteLine(ex.Message);
+                 Console.WriteLine("Keep it between 0-100");
+             }
+             catch(FormatException)
+             {
+                 Console.WriteLine("Numbers please");
              }
                 
             }   
@@ -45,13 +54,18 @@ namespace GradeBook
             
             
             var stats = book.GetStatistics();
-
+            
+            Console.WriteLine($"For the book named: {book.Name}");
             Console.WriteLine($"The high grade is:  {stats.High:n1}\n");
             Console.WriteLine($"The low grade is: {stats.Low:n1}\n");
             Console.WriteLine($"The average grade is: {stats.Average:n1}\n");
             Console.WriteLine($"This averages out to a letter grade of: {stats.Letter}");
             
             ByeResponse goodbye = new ByeResponse("Goodbye");
+            static void OnGradeAdded(object sender, EventArgs e)
+            {
+                Console.WriteLine("A grade was added..");
+            }
             
         }
     }
